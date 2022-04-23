@@ -1,5 +1,5 @@
 # scoop-bucket
-The scoop bucket for the various tools.
+The scoop bucket for various tools.
 
 ```
 scoop bucket add nicholaswilde https://github.com/nicholaswilde/scoop-bucket.git
