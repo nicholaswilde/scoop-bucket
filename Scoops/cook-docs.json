@@ -1,0 +1,15 @@
+{
+    "version": "0.2.3",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nicholaswilde/cook-docs/releases/download/v0.2.3/cook-docs_0.2.3_Windows_x86_64.tar.gz",
+            "bin": [
+                "cook-docs.exe"
+            ],
+            "hash": "3ee5ea3b7991d2e5ba146c85df6675ca6f08bf2eb64720af57f28b7198e1d6cd"
+        }
+    },
+    "homepage": "https://nicholaswilde.io/cook-docs",
+    "license": "Apache License 2.0",
+    "description": "A tool for automatically generating markdown documentation for cooklang recipes"
+}
