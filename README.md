@@ -8,12 +8,12 @@ scoop bucket add nicholaswilde https://github.com/nicholaswilde/scoop-bucket.git
 scoop install nicholaswilde/<appname>
 ```
 
-## :balance_scale:​&nbsp;​ License
+## :balance_scale:&nbsp;​ License
 
 ​[​Apache License 2.0](../LICENSE)
 
 ---
 
-##​:pencil:​&nbsp;​ Author
+## :pencil:&nbsp;​ Author
 
 ​This project was started in 2022 by [​Nicholas Wilde​](https://github.com/nicholaswilde/).
