@@ -1,12 +1,12 @@
 {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/nicholaswilde/cook-docs/releases/download/v0.4.0/cook-docs_0.4.0_Windows_x86_64.tar.gz",
+            "url": "https://github.com/nicholaswilde/cook-docs/releases/download/v0.5.0/cook-docs_0.5.0_Windows_x86_64.tar.gz",
             "bin": [
                 "cook-docs.exe"
             ],
-            "hash": "2b096d78bee96eae7d9a18bee81a6916f7b6bc41f42c6599c1fa269fe1e6d8fe"
+            "hash": "1cb34a5ee43d17e0b7667d298b0b199b3e7070458e965b136612f84c6cf235d8"
         }
     },
     "homepage": "https://nicholaswilde.io/cook-docs",
