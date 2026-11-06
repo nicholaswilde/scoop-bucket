@@ -1,0 +1,9 @@
+# Agent artifacts
+.codegraph/
+.serena/
+.rtk/*
+!.rtk/filters.toml
+.agents/*
+!.agents/skills/
+!.agents/rules/
+!.agents/skills_catalog.md
