@@ -23,6 +23,7 @@ tasks:
     cmds:
       - task: audit:cook-docs
       - task: audit:tfa
+      - task: audit:enstow
 
   audit:cook-docs:
     desc: Audit cook-docs manifest
@@ -39,3 +40,8 @@ tasks:
     desc: Audit tfa manifest
     cmds:
       - jq empty bucket/tfa.json
+
+  audit:enstow:
+    desc: Audit enstow manifest
+    cmds:
+      - jq empty bucket/enstow.json
