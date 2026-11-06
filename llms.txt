@@ -1,0 +1,24 @@
+# nicholaswilde/scoop-bucket
+
+> Scoop bucket providing CLI tools, utilities, and applications for Windows.
+
+This repository is a Scoop bucket maintained by Nicholas Wilde. It hosts manifests for tools and utilities with precompiled binary distribution for Windows (64bit x86_64, 32bit i386, and ARM64).
+
+## Installation and Usage
+
+- [Bucket Repository](https://github.com/nicholaswilde/scoop-bucket): Run `scoop bucket add nicholaswilde https://github.com/nicholaswilde/scoop-bucket.git` to add this bucket.
+- [Install Manifest](https://github.com/nicholaswilde/scoop-bucket#usage): Run `scoop install nicholaswilde/<appname>` after adding bucket.
+
+## Available Manifests
+
+- [cook-docs](https://nicholaswilde.io/cook-docs): A tool for automatically generating markdown documentation for cooklang recipes.
+
+## Development & Maintenance
+
+- [Taskfile Tasks](https://github.com/nicholaswilde/scoop-bucket/blob/main/Taskfile.yml): Automation commands for manifest auditing (`task audit`) and testing (`task test`).
+- [Repository Guidelines](https://github.com/nicholaswilde/scoop-bucket/blob/main/AGENTS.md): Scoop manifest specifications, architecture mappings, and SHA256 checksum requirements.
+
+## Optional
+
+- [License](https://github.com/nicholaswilde/scoop-bucket/blob/main/LICENSE): Apache 2.0 license terms.
+- [Author Profile](https://github.com/nicholaswilde): Upstream project maintainer profile.

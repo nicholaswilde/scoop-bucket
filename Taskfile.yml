@@ -1,0 +1,35 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: audit
+      - task: test
+
+  bootstrap:
+    desc: Initialize the Python environment and install dependencies
+    cmds:
+      - uv sync
+
+  init:
+    desc: Copy .env.example to .env
+    status:
+      - test -f .env
+    cmds:
+      - cp .env.example .env
+
+  audit:
+    desc: Audit all manifests in the bucket
+    cmds:
+      - task: audit:cook-docs
+
+  audit:cook-docs:
+    desc: Audit cook-docs manifest
+    cmds:
+      - jq empty bucket/cook-docs.json
+
+  test:
+    desc: Test all manifests and scripts
+    cmds:
+      - uv run python -m unittest discover -s scripts
+      - jq empty bucket/*.json

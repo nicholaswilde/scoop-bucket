@@ -1,0 +1,98 @@
+# nicholaswilde/scoop-bucket
+
+> Scoop bucket providing CLI tools, utilities, and applications for Windows.
+
+This repository is a Scoop bucket maintained by Nicholas Wilde. It hosts manifests for tools and utilities with precompiled binary distribution for Windows (64bit x86_64, 32bit i386, and ARM64).
+
+## Table of Contents
+
+- Installation and Usage
+- Manifests Overview
+- Detailed Manifest Specifications
+- Development and Maintenance
+- Licensing
+
+---
+
+## Installation and Usage
+
+To use this bucket on Windows via Scoop:
+
+### 1. Add Bucket
+
+```powershell
+scoop bucket add nicholaswilde https://github.com/nicholaswilde/scoop-bucket.git
+```
+
+### 2. Install Applications
+
+```powershell
+scoop install nicholaswilde/<appname>
+```
+
+Or install directly if bucket is already known:
+
+```powershell
+scoop install <appname>
+```
+
+### 3. Update Applications
+
+```powershell
+scoop update
+scoop update <appname>
+```
+
+---
+
+## Manifests Overview
+
+| Manifest | Description | Architectures | Upstream Repository |
+|---|---|---|---|
+| `cook-docs` | A tool for automatically generating markdown documentation for cooklang recipes | Windows 64-bit | [nicholaswilde/cook-docs](https://github.com/nicholaswilde/cook-docs) |
+
+---
+
+## Detailed Manifest Specifications
+
+### cook-docs
+
+- **Homepage**: https://nicholaswilde.io/cook-docs
+- **License**: Apache-2.0
+- **Description**: A tool for automatically generating markdown documentation for cooklang recipes
+- **Executable**: `cook-docs.exe`
+- **Supported Architecture**: 64-bit Windows (`Windows_x86_64`)
+
+---
+
+## Development and Maintenance
+
+### Prerequisites
+
+- [uv](https://docs.astral.sh/uv/) for Python dependency and virtual environment management
+- [Task](https://taskfile.dev/) for workflow execution
+- `jq` for JSON syntax validation
+
+### Tasks
+
+```bash
+# Audit all manifests
+task audit
+
+# Audit a specific manifest
+task audit:cook-docs
+
+# Run test suite
+task test
+```
+
+### Manifest Automation Scripts
+
+- `scripts/add_manifest.py`: Query GitHub release assets, compute SHA256 checksums, and generate new Scoop manifest.
+- `scripts/update_manifest.py`: Check upstream repository for new release versions and update existing manifest hashes.
+
+---
+
+## Licensing
+
+Licensed under the Apache License, Version 2.0 (the "License"). You may obtain a copy of the License in the LICENSE file.

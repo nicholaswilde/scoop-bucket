@@ -1,24 +1,66 @@
-# scoop-bucket
-The scoop bucket for various tools.
+# 🍨 Scoop Bucket 🍨
 
-## :gear:&nbsp; Usage
+The Scoop bucket for various Windows tools.
 
-```
+## 🚀 Usage
+
+First, add the bucket:
+
+```powershell
 scoop bucket add nicholaswilde https://github.com/nicholaswilde/scoop-bucket.git
+```
+
+Then, install an application:
+
+```powershell
 scoop install nicholaswilde/<appname>
 ```
 
-The apps located in the `bucket` folder are automatically updated with [GoReleaser][1]
+Or install directly if the bucket is known:
 
-## :balance_scale:&nbsp;​ License
+```powershell
+scoop install <appname>
+```
 
-​[​Apache License 2.0](../LICENSE)
+## 📦 Available Manifests
 
----
+- `cook-docs`: A tool for automatically generating markdown documentation for cooklang recipes.
 
-## :pencil:&nbsp;​ Author
+## 🛠️ Development
 
-​This project was started in 2022 by [​Nicholas Wilde​][2].
+This project uses [Task](https://taskfile.dev/) for common development tasks.
 
-[1]: https://goreleaser.com/
-[2]: https://github.com/nicholaswilde/
+### Auditing Manifests
+
+Audit all manifests:
+```bash
+task audit
+```
+
+Audit a specific manifest:
+```bash
+task audit:cook-docs
+```
+
+### Testing Manifests
+
+Test all manifests and python scripts:
+```bash
+task test
+```
+
+## 🤖 Automation
+
+This repository is configured to automatically audit, test, and update manifests. It utilizes custom automation scripts and skills to streamline maintenance:
+- `add-manifest`: Automates the creation of new manifests by fetching metadata and calculating SHA256 checksums from GitHub release assets.
+- `update-manifest`: Autonomously scans upstream repositories for new releases and updates manifest versions and checksums.
+
+## ⚖️ License
+
+[Apache License 2.0](LICENSE)
+
+## ✍️ Author
+
+This project was started in 2022 by [Nicholas Wilde][1].
+
+[1]: https://github.com/nicholaswilde/

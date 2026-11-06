@@ -4,17 +4,39 @@ This file provides instructions and context for AI agents working on this reposi
 
 ## Project Structure
 - `bucket/`: Contains Scoop manifest JSON files (`<appname>.json`).
+- `scripts/`: Contains Python automation scripts (`add_manifest.py`, `update_manifest.py`, `find_manifest.py`, `github_utils.py`) and unit tests.
+- `.agents/conductor/`: Contains project management, definition, tech stack, and workflow documents.
 - `.agents/rules/`: Symlinks to standard agentic rules.
-- `.agents/skills/`: Custom project skills and workflows.
+- `.agents/skills/`: Custom project skills (`add-manifest`, `update-manifest`).
 - `.agents/skills_catalog.md`: Catalog of available project skills.
 
 ## Guidelines for Manifest Updates
 When updating or adding Scoop manifests:
 1. **Maintain Style**: Adhere to Scoop JSON manifest conventions (4-space indentation, standard key ordering).
 2. **Version Consistency**: Ensure `version` matches the release tag (without 'v' prefix).
-3. **Architecture Mapping**: Verify URLs and executables under `architecture` (e.g. `64bit`, `32bit`, `arm64`) point to the correct release assets.
+3. **Architecture Mapping**: Verify URLs and executables under `architecture` (e.g. `64bit`, `32bit`, `arm64`) point to the correct Windows release assets.
 4. **Checksums**: Always compute exact SHA256 checksums from release assets. Never guess or fabricate hashes.
-5. **Validation**: Validate JSON syntax using `jq . bucket/<app>.json` before completing tasks.
+5. **Validation**: Validate JSON syntax using `jq empty bucket/<app>.json` or `task audit:<app>` before completing tasks.
+
+## Automated Update Workflow
+You are an automated Scoop manifest updater. Your goal is to keep manifests in the 'bucket/' directory up-to-date with their upstream GitHub releases.
+
+1. **Scan and Parse**: Identify the target manifest(s). Read the `.json` file(s) and identify the upstream GitHub repository from `homepage` or `url`.
+2. **Check for Updates**: For each manifest, use the GitHub CLI (`rtk gh release view --json tagName,assets | cat`) or GitHub API to find the latest stable release.
+3. **Compare Versions**: Compare latest `tagName` (removing any 'v' prefix) with the `version` field in the manifest. Proceed only if a newer version is available.
+4. **Update Assets**:
+   a. Identify required Windows assets (`64bit`, `32bit`, `arm64`).
+   b. Download assets and calculate SHA256 checksums.
+   c. Update the `version` string.
+   d. Update the `url` and `hash` strings within `architecture`.
+   e. Ensure `bin` lists correct executable name(s) (e.g. `["app.exe"]`).
+5. **Maintain Integrity**: Ensure JSON remains valid with 4-space indentation and trailing newline.
+6. **Verify**: Run `task audit` and `task test` to ensure all manifests and scripts pass validation.
+
+## Tool Usage
+You have access to the shell. Use standard tools like `curl`, `sha256sum`, `gh` (GitHub CLI), `jq`, and `uv` to perform your tasks.
+1. When running `gh` commands, always use `rtk` and pipe to `cat` (e.g., `rtk gh release view --json tagName,assets | cat`) to filter output and prevent hanging in interactive pagers.
+2. For executing Python scripts in this repository, always use `uv run` (e.g., `uv run scripts/update_manifest.py <manifest_name>`) to ensure consistent environment and dependency resolution.
 
 <!-- rtk-begin -->
 ## RTK (`rtk`) Command Proxy
@@ -32,7 +54,7 @@ Prefix raw shell commands with `rtk` whenever subcommand exists. `rtk` filters a
 | `cat <file>` (to inspect) | `rtk read <file>` |
 | `diff` | `rtk diff` |
 | `wc` | `rtk wc` |
-| tests / checks | `rtk test <cmd>` or `rtk err <cmd>` |
+| tests / checks (`task audit`, `task test`) | `rtk test <cmd>` or `rtk err <cmd>` |
 | build / lint | `rtk err <cmd>` |
 | noisy output | `rtk summary <cmd>` |
 
@@ -40,7 +62,7 @@ Prefix raw shell commands with `rtk` whenever subcommand exists. `rtk` filters a
 
 1. **ctx sandbox**: inside `ctx_execute` / `ctx_batch_execute`, skip `rtk`; only printed output enters context.
 2. **Exact output needed**: drop `rtk` when raw bytes matter (`git diff` patch, verbatim file edit).
-3. **No subcommand**: run commands without `rtk` subcommand raw (`mkdir`, `rm`, `jq`).
+3. **No subcommand**: run commands without `rtk` subcommand raw (`mkdir`, `rm`, `jq`, `uv run`).
 4. **Unknown**: check `rtk --help` before assuming subcommand exists.
 <!-- rtk-end -->
 
@@ -135,7 +157,7 @@ Use Headroom (`headroom`) MCP tools to manage context window consumption on larg
 
 <!-- taplo-rules-begin -->
 ## Taplo TOML Rules
-- **Format**: Run `rtk taplo fmt` to format TOML files in-place.
+- **Format**: Run `rtk taplo fmt` to format TOML files in-place (`pyproject.toml`).
 - **Validation**: Run `rtk taplo lint` to validate TOML syntax and schema.
 <!-- taplo-rules-end -->
 

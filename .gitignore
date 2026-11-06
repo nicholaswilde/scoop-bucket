@@ -1,9 +1,17 @@
-# Agent artifacts
+# gemini-cli settings
+.gemini/
+
+# GitHub App credentials and secrets
+gha-creds-*.json
+.env
+
+# Python and virtual environments
+.venv/
+__pycache__/
+*.pyc
+
+# Local tool cache and indexes
 .codegraph/
 .serena/
 .rtk/*
 !.rtk/filters.toml
-.agents/*
-!.agents/skills/
-!.agents/rules/
-!.agents/skills_catalog.md
