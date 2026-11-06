@@ -22,6 +22,7 @@ tasks:
     desc: Audit all manifests in the bucket
     cmds:
       - task: audit:cook-docs
+      - task: audit:tfa
 
   audit:cook-docs:
     desc: Audit cook-docs manifest
@@ -33,3 +34,8 @@ tasks:
     cmds:
       - uv run python -m unittest discover -s scripts
       - jq empty bucket/*.json
+
+  audit:tfa:
+    desc: Audit tfa manifest
+    cmds:
+      - jq empty bucket/tfa.json

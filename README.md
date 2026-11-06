@@ -25,6 +25,7 @@ scoop install <appname>
 ## 📦 Available Manifests
 
 - `cook-docs`: A tool for automatically generating markdown documentation for cooklang recipes.
+- `tfa`: 🔐 Fast, lightweight, and secure command-line Two-Factor Authentication (2FA/TOTP/HOTP) generator and manager in Rust 🦀
 
 ## 🛠️ Development
 

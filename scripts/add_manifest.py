@@ -233,7 +233,7 @@ def main():
             bin_name=args.bin,
         )
         manifest_path = f"bucket/{args.manifest_name}.json"
-        manifest_json = json.dumps(manifest_data, indent=4) + "\n"
+        manifest_json = json.dumps(manifest_data, indent=4, ensure_ascii=False) + "\n"
 
         if args.dry_run:
             print(f"--- DRY RUN: Proposed Manifest {manifest_path} ---")
