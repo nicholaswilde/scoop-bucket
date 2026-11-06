@@ -24,6 +24,7 @@ tasks:
       - task: audit:cook-docs
       - task: audit:tfa
       - task: audit:enstow
+      - task: audit:proxmox-mcp-rs
 
   audit:cook-docs:
     desc: Audit cook-docs manifest
@@ -45,3 +46,8 @@ tasks:
     desc: Audit enstow manifest
     cmds:
       - jq empty bucket/enstow.json
+
+  audit:proxmox-mcp-rs:
+    desc: Audit proxmox-mcp-rs manifest
+    cmds:
+      - jq empty bucket/proxmox-mcp-rs.json

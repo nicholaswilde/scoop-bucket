@@ -26,6 +26,7 @@ scoop install <appname>
 
 - `cook-docs`: A tool for automatically generating markdown documentation for cooklang recipes.
 - `enstow`: 📦 Secret-aware dotfile manager combining stow symlinking with sops and age decryption in Rust 🦀
+- `proxmox-mcp-rs`: 🦀 A rust implementation of a proxmox MCP server. 🤖
 - `tfa`: 🔐 Fast, lightweight, and secure command-line Two-Factor Authentication (2FA/TOTP/HOTP) generator and manager in Rust 🦀
 
 ## 🛠️ Development
