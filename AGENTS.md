@@ -36,7 +36,7 @@ You are an automated Scoop manifest updater. Your goal is to keep manifests in t
 ## Tool Usage
 You have access to the shell. Use standard tools like `curl`, `sha256sum`, `gh` (GitHub CLI), `jq`, and `uv` to perform your tasks.
 1. When running `gh` commands, always use `rtk` and pipe to `cat` (e.g., `rtk gh release view --json tagName,assets | cat`) to filter output and prevent hanging in interactive pagers.
-2. For executing Python scripts in this repository, always use `uv run` (e.g., `uv run scripts/update_manifest.py <manifest_name>`) to ensure consistent environment and dependency resolution.
+2. For executing Python scripts in this repository, always prefix commands with `uv` (e.g., `uv run scripts/update_manifest.py <manifest_name>`). Ensure to update and commit `uv.lock` and `pyproject.toml` whenever dependencies or script configurations change.
 
 <!-- rtk-begin -->
 ## RTK (`rtk`) Command Proxy
@@ -160,6 +160,12 @@ Use Headroom (`headroom`) MCP tools to manage context window consumption on larg
 - **Format**: Run `rtk taplo fmt` to format TOML files in-place (`pyproject.toml`).
 - **Validation**: Run `rtk taplo lint` to validate TOML syntax and schema.
 <!-- taplo-rules-end -->
+
+<!-- uv-rules-begin -->
+## Python & `uv` Execution Rules
+- **Command Prefix**: Always prefix Python script executions and commands with `uv` (`uv run <script>`, `uv run python -m unittest ...`).
+- **Lockfile Synchronization**: Always maintain and update `uv.lock` and `pyproject.toml` when dependencies or project metadata change (`uv lock`, `uv add`, `uv sync`).
+<!-- uv-rules-end -->
 
 <!-- sensitive-information-protection-begin -->
 ## Sensitive Information & Secret Protection
