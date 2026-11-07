@@ -149,6 +149,17 @@ Use Headroom (`headroom`) MCP tools to manage context window consumption on larg
 - `headroom_stats`: Monitor headroom cache usage.
 <!-- headroom-end -->
 
+<!-- ripwire-begin -->
+## Ripwire CLI Codebase Navigation
+Use `ripwire` CLI binary (`rtk ripwire <dir> [flags]`) for AST codebase mapping, call graphs, blast radius, and structural queries. Never register or invoke ripwire via MCP server.
+
+- Orient / map task: `rtk ripwire <dir> --for="<task>"`
+- Pack task context: `rtk ripwire <dir> --pack-task="<task>" --legend=compact`
+- Direct callers / callees: `rtk ripwire <dir> --callers=SYM --legend=compact` / `--callees=SYM --legend=compact`
+- Blast radius: `rtk ripwire <dir> --impact=SYM --legend=compact`
+- Report: `rtk ripwire <dir> --report`
+<!-- ripwire-end -->
+
 <!-- ripgrep-guidelines-begin -->
 ## Ripgrep Guidelines
 - **Pattern Searching**: Always use `rg` (ripgrep) or `rtk rg` instead of standard `grep` to search text inside files quickly and save token output.
