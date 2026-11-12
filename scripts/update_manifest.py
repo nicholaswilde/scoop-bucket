@@ -34,13 +34,26 @@ def extract_github_repo(manifest_data):
     return None
 
 
-def get_latest_release(repo, token=None):
-    url = f"https://api.github.com/repos/{repo}/releases/latest"
+def get_latest_release(repo, version=None, token=None):
+    if version:
+        tag = version if version.startswith("v") else f"v{version}"
+        url = f"https://api.github.com/repos/{repo}/releases/tags/{tag}"
+    else:
+        url = f"https://api.github.com/repos/{repo}/releases/latest"
     req = create_github_request(url, token=token)
 
-    with urlopen(req) as response:
-        data = json.loads(response.read().decode())
-        return data["tag_name"].lstrip("v"), data["assets"]
+    try:
+        with urlopen(req) as response:
+            data = json.loads(response.read().decode())
+            return data["tag_name"].lstrip("v"), data["assets"]
+    except Exception:
+        if version and not version.startswith("v"):
+            url = f"https://api.github.com/repos/{repo}/releases/tags/{version}"
+            req = create_github_request(url, token=token)
+            with urlopen(req) as response:
+                data = json.loads(response.read().decode())
+                return data["tag_name"].lstrip("v"), data["assets"]
+        raise
 
 
 def calculate_sha256(url, timeout=30):
@@ -133,15 +146,19 @@ def main():
 
     print(f"Upstream repository: {repo}")
 
-    if args.version_override:
-        latest_version = args.version_override
-        print(f"Using version override: {latest_version}")
-        assets = []
-    else:
-        try:
-            latest_version, assets = get_latest_release(repo, token=token)
-            print(f"Latest version: {latest_version}")
-        except Exception as e:
+    try:
+        latest_version, assets = get_latest_release(
+            repo, version=args.version_override, token=token
+        )
+        print(f"Target version: {latest_version}")
+    except Exception as e:
+        if args.version_override:
+            latest_version = args.version_override
+            assets = []
+            print(
+                f"Using version override: {latest_version} (could not fetch release assets: {e})"
+            )
+        else:
             print(f"Error fetching latest release from GitHub: {e}")
             sys.exit(1)
 
