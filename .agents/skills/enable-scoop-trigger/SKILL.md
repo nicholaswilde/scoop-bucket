@@ -86,12 +86,25 @@ rtk gh secret set APT_REPO_TOKEN --repo "nicholaswilde/${REPO}" \
 In the target repository's `.github/workflows/release.yml`, inspect existing
 jobs.
 
-Add the `update-scoop-bucket` job to the end of the jobs list:
+Add (or verify) a `publish-release` job and add the `update-scoop-bucket` job
+to the end of the jobs list:
 
 ```yaml
+  publish-release:
+    name: publish-release
+    needs: ['create-release', 'build-release']
+    runs-on: ubuntu-latest
+    if: github.ref_type == 'tag'
+    steps:
+      - name: Publish GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release edit ${{ github.ref_name }} --draft=false --prerelease=false --repo ${{ github.repository }}
+
   update-scoop-bucket:
     name: update-scoop-bucket
-    needs: ['create-release', 'build-release']
+    needs: ['create-release', 'publish-release']
     runs-on: ubuntu-latest
     if: github.ref_type == 'tag'
     steps:
@@ -108,9 +121,11 @@ Add the `update-scoop-bucket` job to the end of the jobs list:
 ```
 
 > [!IMPORTANT]
-> Ensure `needs` includes both `create-release` and `build-release` so the
-> dispatch fires only **after** Windows release archives (`.zip`) have finished
-> uploading.
+> Ensure the release is **published** (`draft: false`) before `update-scoop-bucket`
+> dispatches (via `needs: ['create-release', 'publish-release']`, where
+> `publish-release` waits on `build-release`). GitHub's `/releases/tags/{tag}` API
+> and asset download URLs return `404 Not Found` for draft releases, causing the
+> manifest updater to fail or keep stale hashes.
 
 ### Step 5: Verify, Commit, and Push Changes
 
