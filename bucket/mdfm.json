@@ -1,19 +1,19 @@
 {
-    "version": "0.1.1",
+    "version": "0.1.2",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/nicholaswilde/mdfm/releases/download/v0.1.1/mdfm-0.1.1-x86_64-pc-windows-msvc.zip",
+            "url": "https://github.com/nicholaswilde/mdfm/releases/download/v0.1.2/mdfm-0.1.2-x86_64-pc-windows-msvc.zip",
             "bin": [
                 "mdfm.exe"
             ],
-            "hash": "f6eb062a67ec2ab27b8ffa7661a8e306aec397de9112a23205783f0f2850c159"
+            "hash": "fad70c81b836c2c3cddb429407038c2469aeb76c54d7423b5385bf6b6b99922a"
         },
         "32bit": {
-            "url": "https://github.com/nicholaswilde/mdfm/releases/download/v0.1.1/mdfm-0.1.1-i686-pc-windows-msvc.zip",
+            "url": "https://github.com/nicholaswilde/mdfm/releases/download/v0.1.2/mdfm-0.1.2-i686-pc-windows-msvc.zip",
             "bin": [
                 "mdfm.exe"
             ],
-            "hash": "83ce978f2098fe7ed8ad8d1f3fec93fc9cc6391552b3ab6e1a06ccdf64b4e64a"
+            "hash": "55e9c9b1aa917a551541af85dbacf45117e1c334466877220bd4883899c79204"
         }
     },
     "homepage": "https://nicholaswilde.io/mdfm",
