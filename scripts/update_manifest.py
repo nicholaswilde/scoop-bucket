@@ -80,6 +80,13 @@ def update_manifest_data(manifest_data, new_version, assets):
         )
         arch_info["url"] = new_url
 
+        if "extract_dir" in arch_info:
+            arch_info["extract_dir"] = re.sub(
+                r"([-_])[0-9]+\.[0-9]+\.[0-9]+",
+                r"\g<1>" + new_version,
+                arch_info["extract_dir"],
+            )
+
         # Match filename in release assets
         filename_match = re.search(r"/([^/]+)$", new_url)
         if filename_match:
