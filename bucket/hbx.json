@@ -1,0 +1,22 @@
+{
+    "version": "0.1.0",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/nicholaswilde/hbx/releases/download/v0.1.0/hbx-0.1.0-x86_64-pc-windows-msvc.zip",
+            "bin": [
+                "hbx.exe"
+            ],
+            "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "32bit": {
+            "url": "https://github.com/nicholaswilde/hbx/releases/download/v0.1.0/hbx-0.1.0-i686-pc-windows-msvc.zip",
+            "bin": [
+                "hbx.exe"
+            ],
+            "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+    },
+    "homepage": "https://github.com/nicholaswilde/hbx",
+    "license": "Apache-2.0",
+    "description": "Fast, agent-friendly Rust CLI for remote Homebox v0.26+ instances"
+}
