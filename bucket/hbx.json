@@ -6,14 +6,14 @@
             "bin": [
                 "hbx.exe"
             ],
-            "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+            "hash": "8d94f99bca5a410ad1b11e8b9fb1867dd5e1ad66701f43a18839766039ec1aec"
         },
         "32bit": {
             "url": "https://github.com/nicholaswilde/hbx/releases/download/v0.1.0/hbx-0.1.0-i686-pc-windows-msvc.zip",
             "bin": [
                 "hbx.exe"
             ],
-            "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+            "hash": "6099f717e6088ab89b3c6debf3456362656e1ece27aed47b0a874a4d9da22971"
         }
     },
     "homepage": "https://github.com/nicholaswilde/hbx",
