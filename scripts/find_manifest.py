@@ -3,7 +3,7 @@ import os
 import sys
 
 
-def find_manifest(query, bucket_dir="bucket"):
+def find_manifest(query, bucket_dir="bucket", exact=False):
     manifests = [f[:-5] for f in os.listdir(bucket_dir) if f.endswith(".json")]
 
     if not query:
@@ -12,6 +12,9 @@ def find_manifest(query, bucket_dir="bucket"):
     # Exact match
     if query in manifests:
         return query, manifests
+
+    if exact:
+        return None, manifests
 
     # Substring match fallback
     for m in manifests:

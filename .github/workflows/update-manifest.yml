@@ -50,7 +50,7 @@ jobs:
             exit 1
           fi
 
-          CMD_ARGS=("${MANIFEST}")
+          CMD_ARGS=("${MANIFEST}" "--exact")
           if [ -n "${VERSION_RAW}" ]; then
             VERSION="${VERSION_RAW#v}"
             CMD_ARGS+=("--version-override" "${VERSION}")
@@ -67,9 +67,7 @@ jobs:
           MANIFEST="${MANIFEST_RAW%.json}"
           TARGET_FILE="bucket/${MANIFEST}.json"
 
-          if [ -f "${TARGET_FILE}" ]; then
-            jq empty "${TARGET_FILE}"
-          fi
+          jq empty "${TARGET_FILE}"
 
       - name: Commit and push changes
         env:
@@ -80,7 +78,7 @@ jobs:
           MANIFEST="${MANIFEST_RAW%.json}"
           TARGET_FILE="bucket/${MANIFEST}.json"
 
-          if git diff --quiet "${TARGET_FILE}"; then
+          if git diff --quiet -- "${TARGET_FILE}"; then
             echo "${TARGET_FILE} is already up to date. Nothing to commit."
             exit 0
           fi

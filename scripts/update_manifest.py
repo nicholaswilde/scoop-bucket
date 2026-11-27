@@ -125,12 +125,17 @@ def main():
         "--version-override", help="Force update to a specific version"
     )
     parser.add_argument(
+        "--exact",
+        action="store_true",
+        help="Require an exact manifest name match (disable fuzzy matching)",
+    )
+    parser.add_argument(
         "--env-file", default=".env", help="Path to .env file (default: .env)"
     )
     args = parser.parse_args()
 
     token = get_github_token(args.env_file)
-    match, all_manifests = find_manifest(args.manifest_name)
+    match, all_manifests = find_manifest(args.manifest_name, exact=args.exact)
 
     if not match:
         if args.manifest_name:

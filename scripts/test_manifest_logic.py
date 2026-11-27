@@ -1,7 +1,10 @@
+import os
+import tempfile
 import unittest
 from unittest.mock import patch
 
 from add_manifest import generate_manifest, map_windows_assets
+from find_manifest import find_manifest
 from update_manifest import update_manifest_data
 
 
@@ -107,6 +110,27 @@ class TestManifestLogic(unittest.TestCase):
             updated["architecture"]["64bit"]["extract_dir"],
             "repo_0.9.7_Windows_x86_64",
         )
+
+    def test_find_manifest_exact_vs_fuzzy(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            open(os.path.join(tmpdir, "hbx.json"), "w", encoding="utf-8").close()
+
+            match_exact, manifests = find_manifest(
+                "hbctl", bucket_dir=tmpdir, exact=True
+            )
+            self.assertIsNone(match_exact)
+            self.assertEqual(manifests, ["hbx"])
+
+            match_fuzzy, _ = find_manifest(
+                "hbctl", bucket_dir=tmpdir, exact=False
+            )
+            self.assertEqual(match_fuzzy, "hbx")
+
+            open(os.path.join(tmpdir, "hbctl.json"), "w", encoding="utf-8").close()
+            match_found, _ = find_manifest(
+                "hbctl", bucket_dir=tmpdir, exact=True
+            )
+            self.assertEqual(match_found, "hbctl")
 
 
 if __name__ == "__main__":
